@@ -3,7 +3,7 @@ It YAPS!, Faster and better
 (new UI)
 
 
-![enter image description here](https://github.com/stratosvomvos/YapsLock/blob/main/yl.gif?raw=true)
+![enter image description here](https://raw.githubusercontent.com/stratosvomvos/YapsLockV2/main/preview.jpg?raw=true)
 
 
 Powered By Python,Pyqt5 and LangChain
