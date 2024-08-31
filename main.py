@@ -22,10 +22,10 @@ class AboutWindow(QDialog):
     def __init__(self):
         super().__init__()
         
-        self.setWindowTitle("About Yaps Lock")
+        self.setWindowTitle("About lcGPT")
         self.setStyleSheet("background-color: #1e90ff; color: #fff;")
         
-        about_text = "Yap Lock\n\nCreated by Stratosvomvos\n\nPowered by LlamaCPP and LangChain"
+        about_text = "LcGPT\n\nCreated by Stratosvomvos\n\nPowered by LlamaCPP and LangChain"
         self.about_label = QLabel(about_text)
         self.about_label.setAlignment(Qt.AlignCenter)
         self.about_label.setStyleSheet("font-size: 16px; color: #fff;")
@@ -36,14 +36,12 @@ class AboutWindow(QDialog):
 
 class YapLock(QWidget):
     """
-    Yap Lock Application
-    
-    This application allows the user to input a prompt and generates text using LlamaCPP API.
+    YapLock This application allows the user to input a prompt and generates text using LlamaCPP API.
     """
     def __init__(self):
         super().__init__()
         
-        self.setWindowTitle("Yaps Lock")
+        self.setWindowTitle("LcGPT")
         self.setStyleSheet("background-color: #000;")
         
         self.banner_label = QLabel()
@@ -75,7 +73,7 @@ class YapLock(QWidget):
         
         self.set_banner()
 
-        self.model_path = "models/silibot.gguf"  # Ensure this path is correct
+        self.model_path = "models/model.gguf"  # Ensure this path is correct
         self.llm = LlamaCpp(
             model_path=self.model_path,
             temperature=0.5,
@@ -84,15 +82,15 @@ class YapLock(QWidget):
         )
 
     def set_banner(self):
-        """
-        Set an image banner above the text area.
-        """
+       
         pixmap = QPixmap("banner_image.png")  # Replace "banner_image.png" with the path to your image
         self.banner_label.setPixmap(pixmap)
     
     def generate_text(self):
         """
         Generate text using the LlamaCPP API with the user-specified prompt.
+        This took quite a lot of time to implement, mostly because it would add random prefixes to the text like <<User>> and <<Sys>> .
+        ( to fix this, i created the "clean_generated_text" parameter and now it works!)
         """
         # Get the user-specified prompt
         prompt_text = self.prompt_input.text()
@@ -117,19 +115,18 @@ class YapLock(QWidget):
     
     def clean_generated_text(self, text):
         """
-        Clean the generated text by removing any unwanted prefixes or template-related text.
+        Clean the generated text by removing any unwanted prefixes.  (Took more time than i would like to admit)
         """
-        # Strip the assistant prefix and any other template text
         clean_text = text.replace("<<SYS>>", "").replace("<<</SYS>>", "").strip()
         return clean_text
     
     def show_about_window(self):
         """
-        Show the About window.
+        About window function
         """
         about_window = AboutWindow()
         about_window.exec_()
-        self.setFocus()  # Set focus back to the main window when the About window is closed
+        self.setFocus()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
