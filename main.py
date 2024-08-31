@@ -55,7 +55,7 @@ class YapLock(QWidget):
         self.prompt_input.setPlaceholderText("Enter your prompt here...")
         self.prompt_input.setStyleSheet("font-size: 18px; color: #000; background-color: #fff; border: 2px solid #ccc; border-radius: 8px; padding: 10px;")
         
-        self.generate_button = QPushButton("Yap!")
+        self.generate_button = QPushButton("Generate Text!")
         self.generate_button.clicked.connect(self.generate_text)
         self.generate_button.setStyleSheet("background-color: #1e90ff; color: #fff; border: 1px solid #1e90ff; border-radius: 5px; padding: 5px 10px;")
         
